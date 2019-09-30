@@ -37,10 +37,10 @@ class Signup extends React.Component {
     axios.post('/auth/signup', payload)
        .then(function (response) {
          console.log(response);
-         if(response.status == 200){
+         if(response.status === 200){
            console.log("Signup successfull");
          }
-         else if(response.status == 204){
+         else if(response.status === 204){
              console.log(response.data.message)
              alert("Kuch to hua")
          }

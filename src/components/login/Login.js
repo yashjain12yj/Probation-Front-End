@@ -23,10 +23,10 @@ class Login extends React.Component {
      axios.post('/auth/signin', payload)
         .then(function (response) {
           console.log(response);
-          if(response.data.code == 200){
+          if(response.data.code === 200){
             console.log("Login successfull");
           }
-          else if(response.data.code == 204){
+          else if(response.data.code === 204){
               console.log(response.data.message)
               alert("username password do not match")
           }
