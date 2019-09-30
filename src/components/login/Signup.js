@@ -34,9 +34,7 @@ class Signup extends React.Component {
     }
 
     console.log(payload);
-    var apiBaseUrl = "http://localhost:5000/api/auth/";
-
-    axios.post(apiBaseUrl+'signup', payload)
+    axios.post('/auth/signup', payload)
        .then(function (response) {
          console.log(response);
          if(response.status == 200){

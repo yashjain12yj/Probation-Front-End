@@ -15,13 +15,12 @@ class Login extends React.Component {
    }
 
    handleClick(event){
-     var apiBaseUrl = "http://localhost:5000/api/auth/";
      var payload={
      "usernameOrEmail":this.state.usernameOrEmail,
      "password":this.state.password
      }
      console.info(payload);
-     axios.post(apiBaseUrl+'signin', payload)
+     axios.post('/auth/signin', payload)
         .then(function (response) {
           console.log(response);
           if(response.data.code == 200){
