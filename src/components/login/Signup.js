@@ -1,52 +1,45 @@
-import React from 'react';
+import React from 'react'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
 
-import './Signup.css';
-import axios from 'axios';
+import './Signup.css'
+
 
 class Signup extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      name:'',
-      username:'',
-      email:'',
-      password:'',
-      confirmPassword:'',
-      mobile:''
+      name:"",
+      username:"",
+      email:"",
+      password:"",
+      confirmPassword:"",
+      mobile:""
     }
    }
 
   handleClick(event){
-    console.log("Clicked")
-    var payload = {
-      "name":this.state.name,
-      "username":this.state.username,
-      "email":this.state.email,
-      "password":this.state.password,
+    const payload = {
+      "name": this.state.name,
+    	"username": this.state.username,
+    	"email": this.state.email,
+    	"password": this.state.password
     }
 
-    payload = {
-      "name": "Rashi Neema",
-    	"username": "rashineema",
-    	"email": "rashineema@gmail.com",
-    	"password": "neemarashi"
-    }
-
-    console.log(payload);
-    axios.post('/auth/signup', payload)
-       .then(function (response) {
+    axios.post("api/auth/signup", payload)
+     .then(function (response) {
          console.log(response);
          if(response.status === 200){
-           console.log("Signup successfull");
+           console.log(response.data.message)
+           alert(response.data.message)
          }
-         else if(response.status === 204){
+         else if(response.status === 208){
              console.log(response.data.message)
-             alert("Kuch to hua")
+             alert(response.data.message)
          }
          else{
              console.log(response.data.message)
-             alert("Kuch bhi ho gya");
+             alert(response.data.message);
          }
         })
        .catch(function (error) {

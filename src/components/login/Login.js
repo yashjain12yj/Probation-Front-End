@@ -19,20 +19,17 @@ class Login extends React.Component {
      "usernameOrEmail":this.state.usernameOrEmail,
      "password":this.state.password
      }
-     console.info(payload);
-     axios.post('/auth/signin', payload)
+     axios.post('/api/auth/signin', payload)
         .then(function (response) {
           console.log(response);
-          if(response.data.code === 200){
+          if(response.status === 200){
             console.log("Login successfull");
           }
-          else if(response.data.code === 204){
-              console.log(response.data.message)
-              alert("username password do not match")
+          else if(response.status === 208){
+              console.log(response.data)
           }
           else{
-              console.log(response.data.message)
-              alert("Username does not exist");
+              console.log(response.data)
           }
          })
         .catch(function (error) {
