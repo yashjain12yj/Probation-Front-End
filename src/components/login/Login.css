@@ -1,0 +1,12 @@
+.login-form{
+  text-align: center;
+}
+
+.login-heading{
+  padding: 3% 0%;
+}
+
+.donotHaveAccountLogin{
+  font-size: 14px;
+  display: block;
+}

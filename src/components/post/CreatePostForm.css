@@ -1,0 +1,12 @@
+.create_post_form{
+  text-align: center;
+  height:inherit;
+}
+.create_post_form_heading{
+  margin-top: 2%;
+  margin-bottom: 3%;
+}
+
+#image_preview{
+  display: none;
+}
