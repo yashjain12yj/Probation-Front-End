@@ -8,10 +8,11 @@ import './Login.css';
 class Login extends React.Component {
   constructor(props){
     super(props);
-    this.state={
+    this.state = {
       usernameOrEmail:'',
       password:''
-    }
+    };
+    this.handleClick = this.handleClick.bind(this);
    }
 
    handleClick(event){
@@ -19,28 +20,31 @@ class Login extends React.Component {
      "usernameOrEmail":this.state.usernameOrEmail,
      "password":this.state.password
      }
+
      axios.post('/api/auth/signin', payload)
-        .then(function (response) {
-          console.log(response);
+        .then((response) => {
           if(response.status === 200){
-            console.log("Login successfull");
-          }
-          else if(response.status === 208){
-              console.log(response.data)
+            if(response.data.tokenType === "Bearer"){
+              localStorage.setItem('user', response.data.accessToken)
+              this.props.history.push('/')
+            }
           }
           else{
               console.log(response.data)
           }
          })
-        .catch(function (error) {
-            console.log(error);
+        .catch((error) => {
+          if(error.response.status === 401){
+            alert(error.response.data)
+            console.log(error.response);
+          }
          });
    }
 
 render(){
   return (
     <div className="container login-form">
-    	<h2 className="login-heading">Login</h2>
+    	<h2 className="login-heading">Login{localStorage.getItem('user')}</h2>
       <form className="">
         <div className="form-group row">
           <label htmlFor="staticUsernameOrEmail" className="offset-md-3 col-sm-2 col-form-label">Username/Email</label>

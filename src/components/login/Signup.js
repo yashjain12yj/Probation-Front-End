@@ -16,6 +16,7 @@ class Signup extends React.Component {
       confirmPassword:"",
       mobile:""
     }
+    this.handleClick = this.handleClick.bind(this);
    }
 
   handleClick(event){
@@ -27,18 +28,16 @@ class Signup extends React.Component {
     }
 
     axios.post("api/auth/signup", payload)
-     .then(function (response) {
+     .then((response) => {
          console.log(response);
          if(response.status === 200){
-           console.log(response.data.message)
            alert(response.data.message)
+           this.props.history.push('/login')
          }
          else if(response.status === 208){
-             console.log(response.data.message)
              alert(response.data.message)
          }
          else{
-             console.log(response.data.message)
              alert(response.data.message);
          }
         })

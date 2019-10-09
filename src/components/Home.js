@@ -1,22 +1,35 @@
 import React from 'react';
 
-import {Link} from 'react-router-dom'
-
 import './Home.css';
+import LoggedHome from  './LoggedHome'
+import NonloggedHome from './NonLoggedHome'
+import isAuthenticated from './utility/isAuthenticated'
 
-function Home() {
-  return (
-    <div className="container-fluid home">
-      <div className="row  justify-content-md-center">
-        <div className="col col-lg-2 login-btn align-self-center">
-          <Link to="/login" style={{ textDecoration: 'none' }}><button className="btn btn-primary">Login</button></Link>
-        </div>
-        <div className="col col-lg-2 signup-btn align-self-center">
-          <Link to="/signup" style={{ textDecoration: 'none' }}><button className="btn btn-primary">Register</button></Link>
-        </div>
+
+class Home extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      isLoggedIn: false
+    }
+   }
+
+   componentDidMount(){
+     const isLoggedIn = isAuthenticated();
+     this.setState({isLoggedIn: isLoggedIn})
+   }
+
+  render(){
+    return (
+      <div className="container-fluid home">
+        { this.state.isLoggedIn
+          ? <LoggedHome />
+          : <NonloggedHome />
+        }
       </div>
-    </div>
-  );
+    );
+  }
+
 }
 
 export default Home;
