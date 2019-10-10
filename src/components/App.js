@@ -16,7 +16,6 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={
     (props) => {
-      console.log(isAuthenticated())
       if(isAuthenticated()){
         return <Component {...props} />
       }else{
