@@ -1,9 +1,9 @@
 const isAuthenticated = function(){
   const token = localStorage.getItem('user');
   if(!token){
-    console.log('Not Authenticated')
+    // console.log('Not Authenticated')
   }else{
-    console.log('Authenticated')
+    // console.log('Authenticated')
   }
   return token ? true : false;
 }

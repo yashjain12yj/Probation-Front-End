@@ -18,3 +18,39 @@
 .border{
   border: solid 2px;
 }
+
+/*Price*/
+
+.item-title, .item-price, .item-posted, .item-available{
+  padding-left: 5%;
+  padding-top: 2%;
+}
+
+.seller-details{
+  margin: 3%;
+}
+
+/*Carousel*/
+#postCarousel{
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #1b1e21;
+}
+
+#postCarousel > .carousel-inner{
+  padding: 0% 10% 6% 10%;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#postCarousel > .carousel-inner > .carousel-item{
+  width: 100% !important;
+  height: 100% !important;
+}
+#postCarousel > .carousel-inner > .carousel-item > img{
+  padding-top: 1%;
+  margin: auto;
+  width: 100% !important;
+  height: 100% !important;
+}
+

@@ -20,7 +20,6 @@ class Navbar extends React.Component {
    }
 
    componentDidUpdate(prevProps){
-     console.log(prevProps)
      const isLoggedIn = isAuthenticated();
      const num = Math.random()
      if(num%2 === 0){
