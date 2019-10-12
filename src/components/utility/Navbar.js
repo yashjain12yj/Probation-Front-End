@@ -31,6 +31,7 @@ class Navbar extends React.Component {
   handleClick(event){
     localStorage.removeItem('user');
     this.setState({isLoggedIn: false})
+    window.location.reload(false);
   }
 
   render(){
