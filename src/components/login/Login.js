@@ -26,7 +26,9 @@ class Login extends React.Component {
           if(response.status === 200){
             if(response.data.tokenType === "Bearer"){
               localStorage.setItem('user', response.data.accessToken)
+              console.log(this.props)
               this.props.history.push('/')
+              window.location.reload(false);
             }
           }
           else{

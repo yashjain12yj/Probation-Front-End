@@ -3,7 +3,7 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 
 
-function PostButton() {
+function SellButton() {
   return (
     <div className="col col-lg-2 login-btn align-self-center">
       <Link to="/post" style={{ textDecoration: 'none' }}>
@@ -11,6 +11,15 @@ function PostButton() {
       </Link>
     </div>
   );
+}
+function BuyButton() {
+    return (
+        <div className="col col-lg-2 login-btn align-self-center">
+            <Link to="/search" style={{ textDecoration: 'none' }}>
+                <button className="btn btn-primary">Buy</button>
+            </Link>
+        </div>
+    );
 }
 
 class LoggedHome extends React.Component {
@@ -24,7 +33,8 @@ class LoggedHome extends React.Component {
    render(){
      return(
          <div className="row  justify-content-md-center">
-           <PostButton />
+           <SellButton />
+           <BuyButton />
          </div>
      );
    }

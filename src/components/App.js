@@ -6,6 +6,7 @@ import Navbar from './utility/Navbar'
 import Login from './login/Login'
 import Signup from './login/Signup'
 import Home from './Home'
+import Search from './SearchPage'
 import CreatePostForm from './post/CreatePostForm'
 import Post from './post/Post'
 import PageNotFound from './utility/PageNotFound'
@@ -56,6 +57,7 @@ class App extends React.Component {
             <Route path='/signup' exact={true} component={Signup}/>
             <PrivateRoute path='/post' exact component={CreatePostForm} />
             <Route path='/post/:id' exact component={Post} />
+            <Route path='/search' exact component={Search} />
             <Route path='/*' component={PageNotFound} />
           </Switch>
         </Router>
