@@ -26,33 +26,45 @@ class CreatePostForm extends React.Component {
 
   handleSubmit(event){
     event.preventDefault();
-    const formData = new FormData();
+
+    // const payload={
+    //   title: this.state.title,
+    //   description: this.state.description,
+    //   category: this.state.category,
+    //   price: this.state.price,
+    //   contactName: this.state.contactName,
+    //   contactEmail: this.state.contactEmail,
+    //   images: this.state.images
+    // }
+    // console.log(payload);
+
+    var formData = new FormData();
     formData.append('title', this.state.title);
     formData.append('description', this.state.description)
     formData.append('category', this.state.category)
     formData.append('price', this.state.price)
-    formData.append('image', this.state.images[0])
     formData.append('contactName', this.state.contactName)
     formData.append('contactEmail', this.state.contactEmail)
-
-    const payload={
-      title: this.state.title,
-      description: this.state.description,
-      category: this.state.category,
-      image: this.state.images[0],
-      price: this.state.price,
-      contactName: this.state.contactName,
-      contactEmail: this.state.contactEmail
+    for (var i = 0; i < this.state.images.length; i++) {
+        let file = this.state.images[i];
+        formData.append('images[' + i + ']', file, file.name);
     }
-    console.log(payload);
-    console.log(formData);
 
-    axios.post('/api/post/', payload)
+    console.log(formData.get('images[0]'));
+
+    const config = { headers: {
+                      'content-type': 'multipart/form-data',
+                      'token':'ZjT9EewjpOo7KfRxeNpZQw=='
+                    }}
+
+    axios.post('/api/post/', formData, config)
        .then((response) => {
-          console.log("response -> ", response)
+         if(response.status === 200){
+           this.props.history.push('/post/'+response.data)
+         }
        })
        .catch((error) => {
-
+          console.log(error)
        })
   }
 
@@ -62,6 +74,7 @@ class CreatePostForm extends React.Component {
     for(var i = 0; i < event.target.files.length; i++){
       images.push(event.target.files[i])
     }
+    // console.log(images)
     this.setState({
         images: images
     });
@@ -99,8 +112,8 @@ class CreatePostForm extends React.Component {
                 defaultValue="select"
                 onChange= {(event) => this.setState({category:event.target.value})}
               >
-                <option value="Properties">Properties</option>
-                <option value="Cars">Cars</option>
+                <option value="Property">Property</option>
+                <option value="Vehicle">Vehicle</option>
                 <option value="Furniture">Furniture</option>
                 <option value="Mobile">Mobile</option>
                 <option value="Electronics">Electronics</option>

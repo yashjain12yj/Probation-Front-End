@@ -7,6 +7,7 @@ import Login from './login/Login'
 import Signup from './login/Signup'
 import Home from './Home'
 import CreatePostForm from './post/CreatePostForm'
+import Post from './post/Post'
 import PageNotFound from './utility/PageNotFound'
 import isAuthenticated from './utility/isAuthenticated'
 
@@ -43,6 +44,7 @@ class App extends React.Component {
     }
    }
 
+
    render(){
     return (
       <div className="app">
@@ -53,6 +55,7 @@ class App extends React.Component {
             <Route path='/login' exact={true} component={Login}/>
             <Route path='/signup' exact={true} component={Signup}/>
             <PrivateRoute path='/post' exact component={CreatePostForm} />
+            <Route path='/post/:id' exact component={Post} />
             <Route path='/*' component={PageNotFound} />
           </Switch>
         </Router>
