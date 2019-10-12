@@ -7,7 +7,7 @@ function PostButton() {
   return (
     <div className="col col-lg-2 login-btn align-self-center">
       <Link to="/post" style={{ textDecoration: 'none' }}>
-        <button className="btn btn-primary">Post</button>
+        <button className="btn btn-primary">Sell</button>
       </Link>
     </div>
   );
