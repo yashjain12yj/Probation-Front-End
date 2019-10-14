@@ -13,7 +13,7 @@ class Card extends React.Component {
     render() {
         return (
             <div className="card col-sm-3">
-                <img src={this.props.imageUrl} className="card-img-top" alt="image"/>
+                <img src={this.props.imageUrl} className="card-img-top" alt={this.props.title}/>
                 <div className="card-body">
                     <h5 className="card-title">{this.props.title}</h5>
                     <Link to={"/post/"+this.props.id} className="btn btn-primary">View</Link>
