@@ -191,7 +191,7 @@ class CreatePostForm extends React.Component {
             </label >
             <div className = "col-sm-3" >
               <input
-                type = "text"
+                type = "email"
                 className = "form-control"
                 id = "contactEmail"
                 onChange= {(event) => this.setState({contactEmail:event.target.value})}
