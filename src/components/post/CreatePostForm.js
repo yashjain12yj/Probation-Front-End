@@ -27,17 +27,6 @@ class CreatePostForm extends React.Component {
   handleSubmit(event){
     event.preventDefault();
 
-    // const payload={
-    //   title: this.state.title,
-    //   description: this.state.description,
-    //   category: this.state.category,
-    //   price: this.state.price,
-    //   contactName: this.state.contactName,
-    //   contactEmail: this.state.contactEmail,
-    //   images: this.state.images
-    // }
-    // console.log(payload);
-
     var formData = new FormData();
     formData.append('title', this.state.title);
     formData.append('description', this.state.description)
@@ -54,7 +43,7 @@ class CreatePostForm extends React.Component {
 
     const config = { headers: {
                       'content-type': 'multipart/form-data',
-                      'token':'ZjT9EewjpOo7KfRxeNpZQw=='
+                      'token': localStorage.getItem('user')
                     }}
 
     axios.post('/api/post/', formData, config)

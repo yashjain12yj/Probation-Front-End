@@ -6,7 +6,9 @@ import Card from './Card'
 class Cards extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            posts: []
+        }
     }
 
 
@@ -14,31 +16,9 @@ class Cards extends React.Component {
         return (
             <div className="container cards">
                 <div className="row">
-                    <Card
-                        title={"Car"}
-                        imageUrl={"https://drop.ndtv.com/albums/AUTO/porsche-taycan-turbo/6401200x900_1_640x480.jpg"}
-                        id={8}
-                    />
-                    <Card
-                        title={"Car"}
-                        imageUrl={"https://drop.ndtv.com/albums/AUTO/porsche-taycan-turbo/6401200x900_1_640x480.jpg"}
-                        id={8}
-                    />
-                    <Card
-                        title={"Car"}
-                        imageUrl={"https://drop.ndtv.com/albums/AUTO/porsche-taycan-turbo/6401200x900_1_640x480.jpg"}
-                        id={8}
-                    />
-                    <Card
-                        title={"Car"}
-                        imageUrl={"https://drop.ndtv.com/albums/AUTO/porsche-taycan-turbo/6401200x900_1_640x480.jpg"}
-                        id={8}
-                    />
-                    <Card
-                        title={"Car"}
-                        imageUrl={"https://drop.ndtv.com/albums/AUTO/porsche-taycan-turbo/6401200x900_1_640x480.jpg"}
-                        id={8}
-                    />
+                    {this.props.posts.map((value, index)=>
+                         <Card title={value.title} imageUrl={"data:image/png;base64, " + value.images[0].data} id={value.id}/>
+                    )}
                 </div>
             </div>
         );
