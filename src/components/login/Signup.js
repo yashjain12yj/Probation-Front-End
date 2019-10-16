@@ -6,19 +6,19 @@ import './Signup.css'
 
 
 class Signup extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            name:"",
-            username:"",
-            email:"",
-            password:"",
-            confirmPassword:""
+        this.state = {
+            name: "",
+            username: "",
+            email: "",
+            password: "",
+            confirmPassword: ""
         }
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(event){
+    handleClick(event) {
         const payload = {
             "name": this.state.name,
             "username": this.state.username,
@@ -30,17 +30,14 @@ class Signup extends React.Component {
         axios.post("api/auth/signup", payload)
             .then((response) => {
                 console.log(response);
-                if(response.status === 200){
+                if (response.status === 200) {
                     alert(response.data)
                     this.props.history.push('/login')
-                }
-                else if(response.status === 208){
+                } else if (response.status === 208) {
                     alert(response.data)
-                }
-                else if(response.status === 400){
+                } else if (response.status === 400) {
                     alert(response.data)
-                }
-                else{
+                } else {
                     alert(response.data.message);
                 }
             })
@@ -49,7 +46,8 @@ class Signup extends React.Component {
             });
 
     }
-    render(){
+
+    render() {
         return (
             <div className="container signup-form">
                 <h2 className="signup-heading">Register</h2>
@@ -60,7 +58,7 @@ class Signup extends React.Component {
                             <input
                                 type="text"
                                 className="form-control"
-                                onChange = {(event) => this.setState({name:event.target.value})}
+                                onChange={(event) => this.setState({name: event.target.value})}
                             />
                         </div>
                     </div>
@@ -70,7 +68,7 @@ class Signup extends React.Component {
                             <input
                                 type="text"
                                 className="form-control"
-                                onChange = {(event,newValue) => this.setState({username:event.target.value})}
+                                onChange={(event, newValue) => this.setState({username: event.target.value})}
                             />
                         </div>
                     </div>
@@ -80,7 +78,7 @@ class Signup extends React.Component {
                             <input
                                 type="text"
                                 className="form-control"
-                                onChange = {(event,newValue) => this.setState({email:event.target.value})}
+                                onChange={(event, newValue) => this.setState({email: event.target.value})}
                             />
                         </div>
                     </div>
@@ -90,17 +88,18 @@ class Signup extends React.Component {
                             <input
                                 type="password"
                                 className="form-control"
-                                onChange = {(event,newValue) => this.setState({password:event.target.value})}
+                                onChange={(event, newValue) => this.setState({password: event.target.value})}
                             />
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label htmlFor="inputConfirmPassword" className="offset-md-3 col-sm-2 col-form-label">Confirm Password</label>
+                        <label htmlFor="inputConfirmPassword" className="offset-md-3 col-sm-2 col-form-label">Confirm
+                            Password</label>
                         <div className="col-sm-4">
                             <input
                                 type="password"
                                 className="form-control"
-                                onChange = {(event,newValue) => this.setState({confirmPassword:event.target.value})}
+                                onChange={(event, newValue) => this.setState({confirmPassword: event.target.value})}
                             />
                         </div>
                     </div>

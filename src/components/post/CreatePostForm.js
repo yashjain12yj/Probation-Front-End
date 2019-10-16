@@ -76,7 +76,7 @@ class CreatePostForm extends React.Component {
         <div className = "row create_post_form_heading" >
           <h2 className = "col-sm-12" >Sell Item</h2>
         </div >
-        <form>
+        <form onSubmit={(event) => this.handleSubmit(event)}>
           <div className = "form-group row justify-content-center" >
             <label htmlFor = "Title" className = "col-sm-2 col-form-label" >
               <b>Title</b>
@@ -87,6 +87,7 @@ class CreatePostForm extends React.Component {
                 className = "form-control"
                 id = "title"
                 onChange= {(event) => this.setState({title:event.target.value})}
+                required={true}
               />
             </div>
           </div >
@@ -100,6 +101,7 @@ class CreatePostForm extends React.Component {
                 id="inputGroupSelect01"
                 defaultValue="select"
                 onChange= {(event) => this.setState({category:event.target.value})}
+                required={true}
               >
                 <option value="Property">Property</option>
                 <option value="Vehicle">Vehicle</option>
@@ -121,6 +123,7 @@ class CreatePostForm extends React.Component {
                 className="form-control"
                 aria-label="description"
                 onChange= {(event) => this.setState({description:event.target.value})}
+                required={true}
               ></textarea>
             </div>
           </div>
@@ -135,6 +138,8 @@ class CreatePostForm extends React.Component {
                   className="custom-file-input"
                   id="customFile"
                   onChange={this.onFileChangeHandler}
+                  required={true}
+                  title={"Atleast one image is required"}
                 />
                 <label className="custom-file-label" htmlFor="customFile">Choose images</label>
             </div>
@@ -157,6 +162,7 @@ class CreatePostForm extends React.Component {
                   className="form-control"
                   aria-label="price"
                   onChange= {(event) => this.setState({price:event.target.value})}
+                  required={true}
                 />
               </div>
             </div>
@@ -171,6 +177,7 @@ class CreatePostForm extends React.Component {
                 className="form-control"
                 id="contactName"
                 onChange= {(event) => this.setState({contactName:event.target.value})}
+                required={true}
               />
             </div>
           </div>
@@ -184,11 +191,12 @@ class CreatePostForm extends React.Component {
                 className = "form-control"
                 id = "contactEmail"
                 onChange= {(event) => this.setState({contactEmail:event.target.value})}
+                required={true}
               />
             </div>
           </div>
           <div className = "row justify-content-center">
-            <button className="btn btn-primary mb-2" onClick={(event) => this.handleSubmit(event)}>Post</button>
+            <button className="btn btn-primary mb-2" type={"submit"}>Post</button>
           </div>
         </form>
       </div>
