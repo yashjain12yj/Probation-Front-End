@@ -17,7 +17,14 @@ class Cards extends React.Component {
             <div className="container cards">
                 <div className="row">
                     {this.props.posts.map((value, index)=>
-                         <Card title={value.title} imageUrl={"data:image/png;base64, " + value.images[0].data} id={value.id}/>
+                         <Card
+                             title={value.title}
+                             imageUrl={"data:image/png;base64, " + value.images[0].data}
+                             id={value.id}
+                             price={value.price}
+                             toggleAvailability={this.props.toggleAvailability}
+                             available={value.available}
+                         />
                     )}
                 </div>
             </div>

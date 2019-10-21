@@ -27,7 +27,7 @@ class Post extends React.Component {
             .then((response) => {
                 if(response.status === 200){
                     this.setState(response.data);
-                    console.log(this.state)
+                    // console.log(this.state)
                 }
             });
     }

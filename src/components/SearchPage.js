@@ -84,7 +84,7 @@ class Search extends React.Component {
 
                 <div className="search-result">
                     <h3>{this.state.heading}</h3>
-                    <Cards posts={this.state.showPosts}/>
+                    <Cards toggleAvailability={false} posts={this.state.showPosts}/>
                 </div>
             </div>
         );
