@@ -30,11 +30,11 @@ class CreatePostForm extends React.Component {
 
         var formData = new FormData();
         formData.append('title', this.state.title);
-        formData.append('description', this.state.description)
-        formData.append('category', this.state.category)
-        formData.append('price', this.state.price)
-        formData.append('contactName', this.state.contactName)
-        formData.append('contactEmail', this.state.contactEmail)
+        formData.append('description', this.state.description);
+        formData.append('category', this.state.category);
+        formData.append('price', this.state.price);
+        formData.append('contactName', this.state.contactName);
+        formData.append('contactEmail', this.state.contactEmail);
         for (var i = 0; i < this.state.images.length; i++) {
             let file = this.state.images[i];
             formData.append('images[' + i + ']', file, file.name);
@@ -45,7 +45,7 @@ class CreatePostForm extends React.Component {
                 'content-type': 'multipart/form-data',
                 'token': localStorage.getItem('user')
             }
-        }
+        };
 
         axios.post('/api/post/', formData, config)
             .then((response) => {
@@ -64,9 +64,9 @@ class CreatePostForm extends React.Component {
         event.preventDefault();
         console.log(event.target.files);
         let images = [];
-        var filesNames = []
+        var filesNames = [];
         for (let i = 0; i < event.target.files.length; i++) {
-            images.push(event.target.files[i])
+            images.push(event.target.files[i]);
             filesNames.push(event.target.files[i].name)
         }
         this.setState({
@@ -106,10 +106,10 @@ class CreatePostForm extends React.Component {
                             <select
                                 className="custom-select"
                                 id="inputGroupSelect01"
-                                defaultValue="Property"
                                 onChange={(event) => this.setState({category: event.target.value})}
                                 required={true}
                             >
+                                <option value="">Select</option>
                                 <option value="Property">Property</option>
                                 <option value="Vehicle">Vehicle</option>
                                 <option value="Furniture">Furniture</option>
@@ -132,7 +132,7 @@ class CreatePostForm extends React.Component {
                               onChange={(event) => this.setState({description: event.target.value})}
                               required={true}
                               minLength={15}
-                              maxLength={300}
+                              maxLength={3000}
                           />
                         </div>
                     </div>

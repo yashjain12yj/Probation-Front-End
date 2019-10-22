@@ -7,7 +7,7 @@ function SellButton() {
   return (
     <div className="col col-lg-2 login-btn align-self-center">
       <Link to="/post" style={{ textDecoration: 'none' }}>
-        <button className="btn btn-primary">Sell</button>
+        <button className="btn btn-primary">Sell a Item</button>
       </Link>
     </div>
   );
@@ -16,7 +16,7 @@ function BuyButton() {
     return (
         <div className="col col-lg-2 login-btn align-self-center">
             <Link to="/search" style={{ textDecoration: 'none' }}>
-                <button className="btn btn-primary">Buy</button>
+                <button className="btn btn-primary">Search for a item</button>
             </Link>
         </div>
     );
