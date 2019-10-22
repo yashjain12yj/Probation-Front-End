@@ -5,6 +5,7 @@ import './Navbar.css';
 import {Link} from 'react-router-dom'
 import isAuthenticated from './isAuthenticated'
 
+
 class Navbar extends React.Component {
     constructor(props) {
         super(props);
@@ -70,7 +71,15 @@ class Navbar extends React.Component {
 
                         </form>
 
-                        : ''
+                        :
+                        <form className={"form-inline"}>
+                            <Link to={"/login"} className={"btn btn-outline-success my-2 my-sm-0"}>
+                                Login
+                            </Link>
+                            <Link to={"/signup"} className={"btn btn-outline-success my-2 my-sm-0"}>
+                                Register
+                            </Link>
+                        </form>
                     }
                 </div>
             </nav>

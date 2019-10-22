@@ -17,22 +17,17 @@ class Search extends React.Component {
 
     submitSearch(event) {
         event.preventDefault();
-        var token = localStorage.getItem('user');
 
-        const config = {
+        var config = {
             headers: {
                 'searchQuery': this.state.searchQuery
             }
         }
 
-        if(token){
-            config = {
-                headers: {
-                    'token': token,
-                    'searchQuery': this.state.searchQuery
-                }
-            }
-        }
+        // var token = localStorage.getItem('user');
+        /*if(token){
+            config.headers.token = token;
+        }*/
 
 
         const payload = {
