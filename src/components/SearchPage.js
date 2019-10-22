@@ -17,15 +17,28 @@ class Search extends React.Component {
 
     submitSearch(event) {
         event.preventDefault();
+        var token = localStorage.getItem('user');
+
         const config = {
             headers: {
-                'token': localStorage.getItem('user'),
                 'searchQuery': this.state.searchQuery
             }
         }
+
+        if(token){
+            config = {
+                headers: {
+                    'token': token,
+                    'searchQuery': this.state.searchQuery
+                }
+            }
+        }
+
+
         const payload = {
             "searchQuery": this.state.searchQuery
         }
+
         axios.post('/api/search/searchItems', payload, config)
             .then((response) => {
                 if (response.data.length === 0){
