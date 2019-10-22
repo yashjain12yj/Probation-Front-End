@@ -26,9 +26,8 @@ class Post extends React.Component {
         axios.get(`/api/post/${params.id}`)
             .then((response) => {
                 if(response.status === 200){
-                    // console.log(response.data);
                     this.setState(response.data);
-                    console.log(this.state)
+                    // console.log(this.state)
                 }
             });
     }
@@ -36,7 +35,7 @@ class Post extends React.Component {
     render() {
         return (
             <div className = "container post" >
-                <div className="row ">
+                <div className="row upper-part">
                     <div className="col-sm-8 ">
                         <div id="postCarousel" className="carousel " data-ride="carousel" data-interval="false">
                             <ol className="carousel-indicators">
@@ -90,7 +89,7 @@ class Post extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="row">
+                <div className="row description">
                     <div className="col-sm-12 ">
                         <h2>Description</h2>
                         <div>{this.state.description}</div>
