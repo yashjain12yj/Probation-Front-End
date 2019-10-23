@@ -26,7 +26,7 @@ class Card extends React.Component {
 
             }
 
-            axios.post('/api/post/markSold', payload, config)
+            axios.post('/api/private/post/markSold', payload, config)
                 .then((response) => {
                     if (response.status === 200) {
                         console.log("marked sold");
@@ -50,11 +50,12 @@ class Card extends React.Component {
 
             }
 
-            axios.post('/api/post/markAvailable', payload, config)
+            axios.post('/api/private/post/markAvailable', payload, config)
                 .then((response) => {
                     if (response.status === 200) {
                         console.log("marked Available");
                         // alert("marked Available");
+                        
                     }
                 })
                 .catch((error) => {

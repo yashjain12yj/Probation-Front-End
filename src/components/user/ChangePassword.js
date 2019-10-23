@@ -26,7 +26,7 @@ class ChangePassword extends React.Component {
             "newPassword": this.state.newPassword,
             "confirmNewPassword": this.state.confirmNewPassword
         }
-        axios.post('/api/user/changePassword', payload, config)
+        axios.post('/api/private/user/changePassword', payload, config)
             .then((response) => {
                 console.log(response)
                 if (response.status === 200) {
@@ -54,7 +54,7 @@ class ChangePassword extends React.Component {
                 <div className="row justify-content-center">
                     <form onSubmit={(event) => this.submit(event)}>
                         <div className="form-group row">
-                            <label htmlFor="oldPassword" className="col-sm-4 col-form-label">Old Password</label>
+                            <label htmlFor="oldPassword" className="col-sm-4 col-form-label">Current Password</label>
                             <div className="col-sm-8">
                                 <input
                                     type="password"

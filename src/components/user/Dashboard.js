@@ -20,7 +20,7 @@ class Dashboard extends React.Component {
             }
         }
 
-        axios.get('/api/user/dashboard', config)
+        axios.get('/api/private/user/dashboard', config)
             .then((response) => {
                 // console.log(response)
                 if (response.status === 200){

@@ -47,7 +47,7 @@ class CreatePostForm extends React.Component {
             }
         };
 
-        axios.post('/api/post/', formData, config)
+        axios.post('/api/private/post/', formData, config)
             .then((response) => {
                 if (response.status === 200) {
                     this.props.history.push('/post/' + response.data)

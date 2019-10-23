@@ -24,14 +24,14 @@ class Search extends React.Component {
             }
         }
 
-        // var token = localStorage.getItem('user');
-        /*if(token){
-            config.headers.token = token;
-        }*/
-
-
         const payload = {
-            "searchQuery": this.state.searchQuery
+            "searchQuery": this.state.searchQuery.trim()
+        }
+
+        if (this.state.searchQuery.trim() === ""){
+            alert("Please provide some value")
+            this.setState({"searchQuery": ""})
+            return;
         }
 
         axios.post('/api/search/searchItems', payload, config)
