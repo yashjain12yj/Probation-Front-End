@@ -37,6 +37,26 @@ const PrivateRoute = ({component: Component, ...rest}) => (
     }/>
 )
 
+const NonPrivateRoute = ({component: Component, ...rest}) => (
+    <Route {...rest} render={
+        (props) => {
+            if (!isAuthenticated()) {
+                return <Component {...props} />
+            } else {
+                // alert('Login/Register to continue')
+                return <Redirect to={
+                    {
+                        pathname: "/",
+                        state: {
+                            from: props.location
+                        }
+                    }
+                }/>
+            }
+        }
+    }/>
+)
+
 
 class App extends React.Component {
     constructor(props) {
@@ -54,8 +74,8 @@ class App extends React.Component {
                     <Navbar/>
                     <Switch>
                         <Route path='/' exact={true} component={Home}/>
-                        <Route path='/login' exact={true} component={Login}/>
-                        <Route path='/signup' exact={true} component={Signup}/>
+                        <NonPrivateRoute path='/login' exact={true} component={Login}/>
+                        <NonPrivateRoute path='/signup' exact={true} component={Signup}/>
                         <PrivateRoute path='/post' exact component={CreatePostForm}/>
                         <Route path='/post/:id' exact component={Post}/>
                         <Route path='/search' exact component={Search}/>
