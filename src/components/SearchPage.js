@@ -17,13 +17,6 @@ class Search extends React.Component {
 
     submitSearch(event) {
         event.preventDefault();
-
-        var config = {
-            headers: {
-                'searchQuery': this.state.searchQuery
-            }
-        }
-
         const payload = {
             "searchQuery": this.state.searchQuery.trim()
         }
@@ -34,7 +27,7 @@ class Search extends React.Component {
             return;
         }
 
-        axios.post('/api/search/searchItems', payload, config)
+        axios.post('/api/search/searchItems', payload)
             .then((response) => {
                 if (response.data.length === 0){
                     this.setState({heading: "No item found"});
@@ -42,7 +35,6 @@ class Search extends React.Component {
                     this.setState({heading: "Search Result"});
                 }
                 this.setState({showPosts: response.data});
-                console.log(this.state.showPosts)
             })
             .catch((error) => {
                 console.log(error)
@@ -61,7 +53,6 @@ class Search extends React.Component {
                 this.setState({showPosts: response.data});
                 if (response.data.length !== 0)
                     this.setState({heading: "Recent items"});
-                console.log(this.state.showPosts)
             })
             .catch((error) => {
                 console.log(error)

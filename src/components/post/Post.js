@@ -17,7 +17,8 @@ class Post extends React.Component {
             createdAt: '',
             price: 0.0,
             images: [],
-            user: {}
+            user: {},
+            teamsUrl: ""
         };
     }
 
@@ -27,7 +28,21 @@ class Post extends React.Component {
             .then((response) => {
                 if(response.status === 200){
                     this.setState(response.data);
-                    // console.log(this.state)
+                    // generate Url
+                    var url = "https://teams.microsoft.com/l/chat/0/0?users=";
+                    var users = this.state.contactEmail;
+                    url += users;
+                    url += "&message="
+                    var message = "Hi " + this.state.contactName + ", I am interested in " + this.state.title + " posted by you. http://localhost:3000/post/" + this.state.id;
+                    var queryMessage = "";
+                    for(var i = 0; i < message.length; i++){
+                        if( message[i] === " ")
+                            queryMessage += "%20"
+                        else
+                            queryMessage += message[i];
+                    }
+                    url += queryMessage;
+                    this.setState({teamsUrl: url})
                 }
             });
     }
@@ -40,7 +55,6 @@ class Post extends React.Component {
                         <div id="postCarousel" className="carousel " data-ride="carousel" data-interval="false">
                             <ol className="carousel-indicators">
                                 {this.state.images.map((value, index) => {
-                                    console.log(index)
                                     if (index === 0)
                                         return <li data-target="#postCarousel" data-slide-to={index} className="active"></li>
                                     return <li data-target="#postCarousel" data-slide-to={index}></li>
@@ -84,6 +98,7 @@ class Post extends React.Component {
                                     <h4><u>Seller Detail</u></h4>
                                     <h5><strong>Name:</strong> {this.state.contactName}</h5>
                                     <h6><strong>Email:</strong> {this.state.contactEmail}</h6>
+                                    <a href={this.state.teamsUrl}>Chat with seller</a>
                                 </div>
                             </div>
                         </div>
