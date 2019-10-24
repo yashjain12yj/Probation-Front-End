@@ -17,8 +17,6 @@ class CreatePostForm extends React.Component {
             category: '',
             images: [],
             price: '',
-            contactName: '',
-            contactEmail: '',
             fileNames: 'Choose files..'
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,8 +31,6 @@ class CreatePostForm extends React.Component {
         formData.append('description', this.state.description);
         formData.append('category', this.state.category);
         formData.append('price', this.state.price);
-        formData.append('contactName', this.state.contactName);
-        formData.append('contactEmail', this.state.contactEmail);
         for (var i = 0; i < this.state.images.length; i++) {
             let file = this.state.images[i];
             formData.append('images[' + i + ']', file, file.name);
@@ -177,34 +173,7 @@ class CreatePostForm extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="form-group row justify-content-center">
-                        <label htmlFor="ContactName" className="col-sm-2 col-form-label">
-                            <b>Contact Name</b>
-                        </label>
-                        <div className="col-sm-5">
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="contactName"
-                                onChange={(event) => this.setState({contactName: event.target.value})}
-                                required={true}
-                            />
-                        </div>
-                    </div>
-                    <div className="form-group row justify-content-center">
-                        <label htmlFor="ContactEmail" className="col-sm-2 col-form-label">
-                            <b>Contact Email</b>
-                        </label>
-                        <div className="col-sm-5">
-                            <input
-                                type="email"
-                                className="form-control"
-                                id="contactEmail"
-                                onChange={(event) => this.setState({contactEmail: event.target.value})}
-                                required={true}
-                            />
-                        </div>
-                    </div>
+
                     <div className="row justify-content-center">
                         <button className="btn btn-primary mb-2" type={"submit"}>Post</button>
                     </div>

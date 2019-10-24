@@ -12,8 +12,6 @@ class Post extends React.Component {
             description: '',
             category: '',
             available: false,
-            contactName: '',
-            contactEmail: '',
             createdAt: '',
             price: 0.0,
             images: [],
@@ -30,10 +28,10 @@ class Post extends React.Component {
                     this.setState(response.data);
                     // generate Url
                     var url = "https://teams.microsoft.com/l/chat/0/0?users=";
-                    var users = this.state.contactEmail;
+                    var users = this.state.user.email;
                     url += users;
                     url += "&message="
-                    var message = "Hi " + this.state.contactName + ", I am interested in " + this.state.title + " posted by you. http://localhost:3000/post/" + this.state.id;
+                    var message = "Hi " + this.state.user.name + ", I am interested in " + this.state.title + " posted by you. http://localhost:3000/post/" + this.state.id;
                     var queryMessage = "";
                     for(var i = 0; i < message.length; i++){
                         if( message[i] === " ")
@@ -96,9 +94,9 @@ class Post extends React.Component {
                             <div className="col-sm-12 ">
                                 <div className="seller-details">
                                     <h4><u>Seller Detail</u></h4>
-                                    <h5><strong>Name:</strong> {this.state.contactName}</h5>
-                                    <h6><strong>Email:</strong> {this.state.contactEmail}</h6>
-                                    <a href={this.state.teamsUrl}>Chat with seller</a>
+                                    <h5><strong>Name:</strong> {this.state.user.name}</h5>
+                                    <h6><strong>Email:</strong> {this.state.user.email}</h6>
+                                    <a href={this.state.teamsUrl} target="_blank">Chat with seller</a>
                                 </div>
                             </div>
                         </div>
