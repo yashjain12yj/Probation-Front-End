@@ -20,18 +20,10 @@ class Navbar extends React.Component {
         this.setState({isLoggedIn: isLoggedIn})
     }
 
-    componentDidUpdate(prevProps) {
-        const isLoggedIn = isAuthenticated();
-        const num = Math.random()
-        if (num % 2 === 0) {
-            this.setState({isLoggedIn: isLoggedIn})
-        }
-    }
-
     handleClick(event) {
         localStorage.removeItem('user');
-        this.setState({isLoggedIn: false})
-        window.location.reload(false);
+        // this.setState({isLoggedIn: false})
+        window.location.reload();
     }
 
     render() {

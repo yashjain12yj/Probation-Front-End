@@ -15,6 +15,7 @@ import Dashboard from "./user/Dashboard";
 import ChangePassword from "./user/ChangePassword";
 
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
+import EditPost from "./post/EditPost";
 
 
 const PrivateRoute = ({component: Component, ...rest}) => (
@@ -79,6 +80,7 @@ class App extends React.Component {
                         <Route path='/post/:id' exact component={Post}/>
                         <Route path='/search' exact component={Search}/>
                         <PrivateRoute path='/dashboard' exact component={Dashboard}/>
+                        <PrivateRoute path='/edit/:id' exact component={EditPost}/>
                         <PrivateRoute path='/changePassword' exact component={ChangePassword}/>
                         <Route path='/*' component={PageNotFound}/>
                     </Switch>

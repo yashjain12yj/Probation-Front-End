@@ -1,72 +1,43 @@
 import React from 'react';
-import axios from 'axios';
 
-import './CreatePostForm.css';
+import './EditPost.css'
+import axios from "axios";
 
-// To upload multiple image
-// https://codepen.io/mianzaid/pen/GeEbYV
-// To preview Images
-// https://bootsnipp.com/snippets/eNbOa
 
-class CreatePostForm extends React.Component {
+class EditPost extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: '',
-            description: '',
-            category: '',
-            price: '',
-            fileNames: 'Choose files..',
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.onFileChangeHandler = this.onFileChangeHandler.bind(this);
     }
 
-    handleSubmit(event) {
+    handleSubmit(event){
         event.preventDefault();
-
-        var formData = new FormData();
-        formData.append('title', this.state.title);
-        formData.append('description', this.state.description);
-        formData.append('category', this.state.category);
-        formData.append('price', this.state.price);
-        for (var i = 0; i < this.state.images.length; i++) {
-            let file = this.state.images[i];
-            formData.append('images[' + i + ']', file, file.name);
-        }
-
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data',
-                'token': localStorage.getItem('user')
-            }
-        };
-
-        axios.post('/api/private/post/', formData, config)
+        console.log("Submitting Form")
+    }
+    componentDidMount() {
+        const { match: { params } } = this.props;
+        axios.get(`/api/post/${params.id}`)
             .then((response) => {
-                if (response.status === 200) {
-                    this.props.history.push('/post/' + response.data)
+                if(response.status === 200){
+                    this.setState(response.data);
+                    console.log(this.state)
                 }
-            })
-            .catch((error) => {
-                if (error.response.status === 400) {
-                    alert(error.response.data);
-                }
-            })
+            });
     }
 
     onFileChangeHandler(event) {
         event.preventDefault();
+        console.log(event.target.files);
         let images = [];
         var filesNames = [];
-
         for (let i = 0; i < event.target.files.length; i++) {
             images.push(event.target.files[i]);
             filesNames.push(event.target.files[i].name)
         }
         this.setState({
             images: images,
-            fileNames: filesNames.join(", ").substr(0, 40) + "......"
+            fileNames: filesNames.join(", ").substr(0,40)+"......"
         });
     }
 
@@ -74,7 +45,7 @@ class CreatePostForm extends React.Component {
         return (
             <div className="container-fluid create_post_form">
                 <div className="row create_post_form_heading">
-                    <h2 className="col-sm-12">Sell Item</h2>
+                    <h2 className="col-sm-12">Edit Item</h2>
                 </div>
                 <form onSubmit={(event) => this.handleSubmit(event)}>
                     <div className="form-group row justify-content-center">
@@ -90,6 +61,7 @@ class CreatePostForm extends React.Component {
                                 required={true}
                                 minLength={5}
                                 maxLength={50}
+                                value={this.state.title}
                             />
                         </div>
                     </div>
@@ -103,6 +75,7 @@ class CreatePostForm extends React.Component {
                                 id="inputGroupSelect01"
                                 onChange={(event) => this.setState({category: event.target.value})}
                                 required={true}
+                                value={this.state.category}
                             >
                                 <option value="">Select</option>
                                 <option value="Property">Property</option>
@@ -128,6 +101,7 @@ class CreatePostForm extends React.Component {
                               required={true}
                               minLength={15}
                               maxLength={3000}
+                              value={this.state.description}
                           />
                         </div>
                     </div>
@@ -168,26 +142,19 @@ class CreatePostForm extends React.Component {
                                     required={true}
                                     min={1}
                                     max={10000000}
+                                    value={this.state.price}
                                 />
                             </div>
                         </div>
                     </div>
 
                     <div className="row justify-content-center">
-                        <button className="btn btn-primary mb-2" type={"submit"}>Post</button>
+                        <button className="btn btn-primary mb-2" type={"submit"}>Submit</button>
                     </div>
                 </form>
-                {this.state.images && <h3>Image Preview</h3>}
-                <div className="container">
-                    <div className="row">
-                        {this.state.images && [...this.state.images].map((file)=>(
-                            <img src={URL.createObjectURL(file)} className=" img-thumbnail col-lg-3" alt={"filename"}/>
-                        ))}
-                    </div>
-                </div>
             </div>
-        )
-    };
+        );
+    }
 }
 
-export default CreatePostForm;
+export default EditPost;

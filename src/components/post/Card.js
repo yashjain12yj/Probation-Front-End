@@ -13,17 +13,41 @@ class Card extends React.Component {
 
     }
 
+    handleDelete(event){
+        // event.preventDefault();
+        console.log("Delete post")
+        const config = {
+            headers: {
+                'token': localStorage.getItem('user'),
+            }
+        }
+        const payload = {
+            'id': parseInt(this.props.id)
+        }
+
+        axios.post('/api/private/post/delete', payload, config)
+            .then((response) => {
+                if (response.status === 200) {
+                    console.log("Post Deleted");
+                    window.location.reload();
+                }
+            })
+            .catch((error) => {
+                if (error.response.status === 400) {
+                    alert(error.response.data);
+                }
+            })
+    }
     toggleChange(event) {
         if(event.target.checked){
             // mark as sold
             const config = {
                 headers: {
                     'token': localStorage.getItem('user'),
-                    'itemId': this.props.id
                 }
             }
             const payload = {
-
+                'id': parseInt(this.props.id)
             }
 
             axios.post('/api/private/post/markSold', payload, config)
@@ -43,11 +67,10 @@ class Card extends React.Component {
             const config = {
                 headers: {
                     'token': localStorage.getItem('user'),
-                    'itemId': this.props.id
                 }
             }
             const payload = {
-
+                'id': parseInt(this.props.id)
             }
 
             axios.post('/api/private/post/markAvailable', payload, config)
@@ -71,6 +94,20 @@ class Card extends React.Component {
 
         return (
             <div className="card col-sm-3">
+                <div className="card-title">
+                    <h4>Title
+                        {this.props.toggleAvailability &&
+                            <span>
+                                <i className="fas fa-ellipsis-v card-title-heading " id="cardMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
+                                <div className="dropdown-menu" aria-labelledby="cardMenuButton">
+                                    <Link to={"/edit/"+this.props.id} className="dropdown-item">Edit</Link>
+                                    <a className="dropdown-item" href="#" onClick={(event) => {if(window.confirm('Delete the item?')){this.handleDelete(event)};}}>Delete</a>
+                                </div>
+                            </span>
+                        }
+
+                    </h4>
+                </div>
                 <img src={this.props.imageUrl} className="card-img-top" alt={this.props.title}/>
                 <div className="card-body">
                     <h5 className="card-title">{this.props.title}</h5>

@@ -82,7 +82,7 @@ class Signup extends React.Component {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label htmlFor="staticEmail" className="offset-md-3 col-sm-2 col-form-label">Email</label>
+                        <label htmlFor="staticEmail" className="offset-md-3 col-sm-2 col-form-label">Email(arezzosky.com)</label>
                         <div className="col-sm-4">
                             <input
                                 type="email"

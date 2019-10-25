@@ -29,7 +29,6 @@ class Dashboard extends React.Component {
                         this.setState({heading: "Your Items"});
                     else
                         this.setState({heading: "You have not posted any item yet"});
-                    console.log(this.state.items)
                 }
             })
             .catch((error) => {

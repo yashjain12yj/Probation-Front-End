@@ -96,7 +96,7 @@ class Post extends React.Component {
                                     <h4><u>Seller Detail</u></h4>
                                     <h5><strong>Name:</strong> {this.state.user.name}</h5>
                                     <h6><strong>Email:</strong> {this.state.user.email}</h6>
-                                    <a href={this.state.teamsUrl} target="_blank">Chat with seller</a>
+                                    <a href={this.state.teamsUrl} target="_blank"  rel="noopener noreferrer">Chat with seller</a>
                                 </div>
                             </div>
                         </div>
