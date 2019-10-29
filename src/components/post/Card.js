@@ -101,7 +101,7 @@ class Card extends React.Component {
                                 <i className="fas fa-ellipsis-v card-title-heading " id="cardMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
                                 <div className="dropdown-menu" aria-labelledby="cardMenuButton">
                                     <Link to={"/edit/"+this.props.id} className="dropdown-item">Edit</Link>
-                                    <a className="dropdown-item" href="#" onClick={(event) => {if(window.confirm('Delete the item?')){this.handleDelete(event)};}}>Delete</a>
+                                    <a className="dropdown-item" href="/sdf" onClick={(event) => {if(window.confirm('Delete the item?')){this.handleDelete(event)};}}>Delete</a>
                                 </div>
                             </span>
                         }

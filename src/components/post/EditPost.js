@@ -9,13 +9,47 @@ class EditPost extends React.Component {
         super(props);
         this.state = {
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onFileChangeHandler = this.onFileChangeHandler.bind(this);
     }
 
     handleSubmit(event){
         event.preventDefault();
-        console.log("Submitting Form")
+
+        let formData = new FormData();
+        formData.append('id', this.state.id);
+        formData.append('title', this.state.title);
+        formData.append('description', this.state.description);
+        formData.append('category', this.state.category);
+        formData.append('price', this.state.price);
+        if (this.state.imgsChanged){
+            for (let i = 0; i < this.state.images.length; i++) {
+                let file = this.state.images[i];
+                formData.append('images[' + i + ']', file, file.name);
+            }
+        }
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data',
+                'token': localStorage.getItem('user')
+            }
+        };
+        axios.post('/api/private/post/edit', formData, config)
+            .then((response) => {
+                if (response.status === 200) {
+                    alert("Post edited");
+                    this.props.history.push('/post/' + this.state.id);
+                }
+            })
+            .catch((error) => {
+                if (error.response.status === 400) {
+                    alert(error.response.data);
+                }
+            })
+
     }
     componentDidMount() {
+        this.setState({imgsChanged: false})
         const { match: { params } } = this.props;
         axios.get(`/api/post/${params.id}`)
             .then((response) => {
@@ -28,16 +62,17 @@ class EditPost extends React.Component {
 
     onFileChangeHandler(event) {
         event.preventDefault();
-        console.log(event.target.files);
+        this.setState({imgsChanged: true})
         let images = [];
         var filesNames = [];
+
         for (let i = 0; i < event.target.files.length; i++) {
             images.push(event.target.files[i]);
             filesNames.push(event.target.files[i].name)
         }
         this.setState({
             images: images,
-            fileNames: filesNames.join(", ").substr(0,40)+"......"
+            fileNames: filesNames.join(", ").substr(0, 40) + "......"
         });
     }
 
@@ -116,7 +151,7 @@ class EditPost extends React.Component {
                                 id="imageInput"
                                 multiple
                                 onChange={this.onFileChangeHandler}
-                                required={true}
+                                required={false}
                                 minLength={1}
                                 maxLength={10}
                                 accept="image/*"
