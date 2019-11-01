@@ -7,28 +7,23 @@ import './Card.css'
 class Card extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        }
+        this.state = {}
 
     }
 
-    handleDelete(event){
-        // event.preventDefault();
+    handleDelete(event) {
+        event.preventDefault();
         console.log("Delete post")
         const config = {
+            data: {'id': parseInt(this.props.id)},
             headers: {
                 'token': localStorage.getItem('user'),
             }
         }
-        const payload = {
-            'id': parseInt(this.props.id)
-        }
 
-        axios.post('/api/private/post/delete', payload, config)
+        axios.delete('/api/private/post/delete', config)
             .then((response) => {
                 if (response.status === 200) {
-                    console.log("Post Deleted");
                     window.location.reload();
                 }
             })
@@ -38,8 +33,9 @@ class Card extends React.Component {
                 }
             })
     }
+
     toggleChange(event) {
-        if(event.target.checked){
+        if (event.target.checked) {
             // mark as sold
             const config = {
                 headers: {
@@ -62,7 +58,7 @@ class Card extends React.Component {
                         alert(error.response.data);
                     }
                 })
-        }else{
+        } else {
             // mark as available
             const config = {
                 headers: {
@@ -78,7 +74,7 @@ class Card extends React.Component {
                     if (response.status === 200) {
                         console.log("marked Available");
                         // alert("marked Available");
-                        
+
                     }
                 })
                 .catch((error) => {
@@ -97,11 +93,17 @@ class Card extends React.Component {
                 <div className="card-title">
                     <h4>Title
                         {this.props.toggleAvailability &&
-                            <span>
-                                <i className="fas fa-ellipsis-v card-title-heading " id="cardMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
+                        <span>
+                                <i className="fas fa-ellipsis-v card-title-heading " id="cardMenuButton"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                 <div className="dropdown-menu" aria-labelledby="cardMenuButton">
-                                    <Link to={"/edit/"+this.props.id} className="dropdown-item">Edit</Link>
-                                    <a className="dropdown-item" href="/sdf" onClick={(event) => {if(window.confirm('Delete the item?')){this.handleDelete(event)};}}>Delete</a>
+                                    <Link to={"/edit/" + this.props.id} className="dropdown-item">Edit</Link>
+                                    <a className="dropdown-item" href="/sdf" onClick={(event) => {
+                                        if (window.confirm('Delete the item?')) {
+                                            this.handleDelete(event)
+                                        }
+                                        ;
+                                    }}>Delete</a>
                                 </div>
                             </span>
                         }
@@ -120,9 +122,9 @@ class Card extends React.Component {
                         <div className={"col-6"}>
                             Sold
                             {this.props.available ?
-                            <input type="checkbox" onChange={(event) => this.toggleChange(event)}
-                                   aria-label="mark as sold"  />
-                                   :
+                                <input type="checkbox" onChange={(event) => this.toggleChange(event)}
+                                       aria-label="mark as sold"/>
+                                :
                                 <input type="checkbox" onChange={(event) => this.toggleChange(event)}
                                        aria-label="mark as sold" checked/>
                             }
